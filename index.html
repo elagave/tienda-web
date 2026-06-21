@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marbit — Tienda en línea</title>
+  <meta name="description" content="Cómputo, electrónica y accesorios en Valle de Bravo. Compra en línea y recoge en tienda o recibe a domicilio." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBlN2M2NiIvPjxyZWN0IHg9IjE4LjUiIHk9IjMuNSIgd2lkdGg9IjYuNSIgaGVpZ2h0PSIxMSIgcng9IjEuMiIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iLjkyIi8+PHJlY3QgeD0iNi41IiB5PSI4IiB3aWR0aD0iMTAuNSIgaGVpZ2h0PSI2LjUiIHJ4PSIxLjgiIGZpbGw9IiNmZmZmZmYiLz48cmVjdCB4PSI4LjIiIHk9IjkuNyIgd2lkdGg9IjcuMSIgaGVpZ2h0PSIzLjEiIHJ4PSIxIiBmaWxsPSIjMGU3YzY2Ii8+PHJlY3QgeD0iNC41IiB5PSIxNCIgd2lkdGg9IjIzIiBoZWlnaHQ9IjEzIiByeD0iMi4yIiBmaWxsPSIjZmZmZmZmIi8+PGcgZmlsbD0iIzBlN2M2NiI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4LjUiIHI9IjEuMyIvPjxjaXJjbGUgY3g9IjEzIiBjeT0iMTguNSIgcj0iMS4zIi8+PGNpcmNsZSBjeD0iMTciIGN5PSIxOC41IiByPSIxLjMiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMjMiIHI9IjEuMyIvPjxjaXJjbGUgY3g9IjEzIiBjeT0iMjMiIHI9IjEuMyIvPjxjaXJjbGUgY3g9IjE3IiBjeT0iMjMiIHI9IjEuMyIvPjwvZz48cmVjdCB4PSIyMC4zIiB5PSIxNy4zIiB3aWR0aD0iNC44IiBoZWlnaHQ9IjciIHJ4PSIxLjMiIGZpbGw9IiNmNTllMGIiLz48L3N2Zz4=" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --esmeralda: #0e7c66; --esmeralda-osc: #0a5f4e; --esmeralda-suave: #e6f3ef;
+      --marino: #1e3a8a; --ambar: #f59e0b;
+      --tinta: #0f172a; --gris: #64748b; --linea: #e6e9ee;
+      --fondo: #f6f8f9; --blanco: #ffffff;
+      --radio: 16px; --radio-sm: 10px;
+      --sombra: 0 1px 3px rgba(15,23,42,.06), 0 8px 24px rgba(15,23,42,.05);
+      --display: 'Space Grotesk', sans-serif; --texto: 'Inter', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--texto); color: var(--tinta); background: var(--fondo); }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---- Encabezado ---- */
+    .tope { position: sticky; top: 0; z-index: 30; background: var(--blanco); border-bottom: 1px solid var(--linea); }
+    .tope-int { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 14px 20px; }
+    .marca { display: flex; align-items: baseline; gap: 8px; }
+    .marca-logo { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: -.5px; color: var(--marino); line-height: 1; }
+    .marca-logo span { color: var(--esmeralda); }
+    .marca-tag { font-size: 11.5px; color: var(--gris); font-weight: 500; display: none; }
+    .crece { flex: 1; }
+    .btn-carrito { position: relative; display: inline-flex; align-items: center; gap: 8px; background: var(--esmeralda); color: #fff; border: 0; border-radius: 999px; padding: 10px 16px; font-weight: 600; font-size: 14px; cursor: pointer; font-family: var(--texto); }
+    .btn-carrito:hover { background: var(--esmeralda-osc); }
+    .auth-zona { display: flex; align-items: center; gap: 10px; margin-right: 4px; }
+    .btn-cuenta { background: none; border: 1px solid var(--linea); color: var(--tinta); border-radius: 999px; padding: 9px 15px; font-weight: 600; font-size: 13.5px; cursor: pointer; font-family: var(--texto); }
+    .btn-cuenta:hover { border-color: var(--esmeralda); color: var(--esmeralda-osc); }
+    .cuenta-nom { font-size: 13.5px; font-weight: 600; color: var(--tinta); }
+    .cuenta-nom span { color: var(--esmeralda-osc); }
+    .btn-salir { background: none; border: 0; color: var(--gris); font-size: 12.5px; cursor: pointer; font-family: var(--texto); text-decoration: underline; }
+    @media (max-width: 560px) { .cuenta-nom { display: none; } }
+
+    /* ---- Modal de cuenta (login / registro) ---- */
+    .auth-capa { position: fixed; inset: 0; background: rgba(15,23,42,.55); z-index: 80; display: none; place-content: center; padding: 18px; overflow-y: auto; }
+    .auth-capa.abierto { display: grid; }
+    .auth { background: var(--blanco); border-radius: var(--radio); max-width: 420px; width: 100%; align-self: center; max-height: 94vh; overflow-y: auto; }
+    .auth-top { padding: 22px 24px 0; position: relative; }
+    .auth-x { position: absolute; top: 16px; right: 18px; background: 0; border: 0; font-size: 22px; cursor: pointer; color: var(--gris); }
+    .auth-tabs { display: flex; gap: 4px; background: var(--fondo); border-radius: 12px; padding: 4px; margin-top: 8px; }
+    .auth-tab { flex: 1; border: 0; background: none; padding: 9px; border-radius: 9px; font-weight: 600; font-size: 14px; cursor: pointer; color: var(--gris); font-family: var(--texto); }
+    .auth-tab.on { background: var(--blanco); color: var(--tinta); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .auth-cuerpo { padding: 18px 24px 4px; }
+    .auth-intro { font-size: 13px; color: var(--gris); margin: 0 0 6px; }
+    .auth-lbl { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 5px; }
+    .auth-input { width: 100%; border: 1px solid var(--linea); border-radius: 10px; padding: 11px 12px; font-size: 14px; font-family: var(--texto); outline: 0; }
+    .auth-input:focus { border-color: var(--esmeralda); }
+    .auth-err { background: #fef2f2; color: #b91c1c; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-top: 12px; }
+    .auth-pie { padding: 16px 24px 22px; }
+    .auth-btn { width: 100%; background: var(--esmeralda); color: #fff; border: 0; border-radius: 12px; padding: 13px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: var(--texto); }
+    .auth-btn:hover { background: var(--esmeralda-osc); }
+    .auth-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .carrito-num { background: var(--ambar); color: #3b2a06; font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; border-radius: 999px; display: grid; place-content: center; padding: 0 5px; }
+
+    /* ---- Banda de búsqueda ---- */
+    .banda { background: linear-gradient(120deg, var(--marino), #25489e); color: #fff; }
+    .banda-int { max-width: 1180px; margin: 0 auto; padding: 26px 20px 30px; }
+    .banda h1 { font-family: var(--display); font-size: clamp(22px, 4vw, 32px); margin: 0 0 4px; font-weight: 700; }
+    .banda p { margin: 0 0 18px; color: #c9d6f5; font-size: 14px; }
+    .buscador { display: flex; background: #fff; border-radius: 12px; padding: 4px; max-width: 540px; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    .buscador input { flex: 1; border: 0; outline: 0; padding: 12px 14px; font-size: 15px; font-family: var(--texto); border-radius: 10px; color: var(--tinta); }
+
+    /* ---- Cuerpo ---- */
+    .cuerpo { max-width: 1180px; margin: 0 auto; padding: 22px 20px 60px; }
+    .cats { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 14px; margin-bottom: 6px; -webkit-overflow-scrolling: touch; }
+    .chip { white-space: nowrap; border: 1px solid var(--linea); background: var(--blanco); color: var(--tinta); border-radius: 999px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .chip.activo { background: var(--esmeralda); border-color: var(--esmeralda); color: #fff; }
+
+    .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+    .prod { background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--sombra); transition: transform .12s ease, box-shadow .12s ease; }
+    .prod:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(15,23,42,.08), 0 20px 40px rgba(15,23,42,.08); }
+    .prod-img { aspect-ratio: 1/1; background: #f1f5f9; cursor: pointer; display: grid; place-content: center; overflow: hidden; }
+    .prod-img img { width: 100%; height: 100%; object-fit: contain; padding: 14px; }
+    .prod-img .sin { color: #cbd5e1; font-size: 13px; }
+    .prod-cuerpo { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .prod-nom { font-weight: 600; font-size: 14.5px; line-height: 1.3; cursor: pointer; }
+    .prod-cat { font-size: 11.5px; color: var(--gris); }
+    .prod-pie { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 8px; }
+    .prod-precio { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--esmeralda-osc); }
+    .prod-precio.consultar { font-size: 13px; color: var(--gris); font-family: var(--texto); }
+    .agotado { font-size: 11px; font-weight: 700; color: #b91c1c; background: #fef2f2; padding: 3px 8px; border-radius: 999px; }
+    .btn-add { border: 0; background: var(--esmeralda-suave); color: var(--esmeralda-osc); border-radius: 10px; padding: 9px 12px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: var(--texto); }
+    .btn-add:hover { background: var(--esmeralda); color: #fff; }
+    .btn-add:disabled { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; }
+
+    .estado { text-align: center; color: var(--gris); padding: 60px 20px; }
+    .vermas { display: block; margin: 26px auto 0; background: var(--blanco); border: 1px solid var(--linea); border-radius: 999px; padding: 12px 26px; font-weight: 600; cursor: pointer; font-family: var(--texto); }
+
+    /* ---- Carrito (cajón) ---- */
+    .capa { position: fixed; inset: 0; background: rgba(15,23,42,.5); z-index: 40; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .capa.abierta { opacity: 1; pointer-events: auto; }
+    .cajon { position: fixed; top: 0; right: 0; height: 100%; width: 400px; max-width: 92vw; background: var(--blanco); z-index: 50; transform: translateX(100%); transition: transform .25s ease; display: flex; flex-direction: column; }
+    .cajon.abierto { transform: translateX(0); }
+    .cajon-top { display: flex; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--linea); }
+    .cajon-top h3 { margin: 0; font-family: var(--display); font-size: 18px; }
+    .cajon-x { margin-left: auto; background: 0; border: 0; font-size: 22px; cursor: pointer; color: var(--gris); line-height: 1; }
+    .cajon-items { flex: 1; overflow-y: auto; padding: 12px 20px; }
+    .ci { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--linea); }
+    .ci-img { width: 54px; height: 54px; border-radius: 8px; background: #f1f5f9; object-fit: contain; padding: 4px; flex-shrink: 0; }
+    .ci-info { flex: 1; min-width: 0; }
+    .ci-nom { font-size: 13.5px; font-weight: 600; }
+    .ci-precio { font-size: 13px; color: var(--gris); }
+    .ci-controles { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .ci-controles button { width: 26px; height: 26px; border: 1px solid var(--linea); background: var(--blanco); border-radius: 7px; font-size: 15px; cursor: pointer; line-height: 1; }
+    .ci-quitar { margin-left: auto; background: 0; border: 0; color: #b91c1c; font-size: 12px; cursor: pointer; }
+    .cajon-pie { border-top: 1px solid var(--linea); padding: 16px 20px; background: var(--blanco); }
+    .entrega-tit { font-size: 12px; font-weight: 700; color: var(--gris); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+    .entrega-ops { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; max-height: 130px; overflow-y: auto; }
+    .entrega-op { display: flex; align-items: center; gap: 9px; font-size: 13.5px; cursor: pointer; padding: 5px 0; }
+    .entrega-op .costo { margin-left: auto; color: var(--gris); font-size: 12.5px; }
+    .totales { font-size: 14px; }
+    .totales .fila { display: flex; justify-content: space-between; padding: 3px 0; color: var(--gris); }
+    .totales .fila.total { color: var(--tinta); font-weight: 700; font-size: 18px; font-family: var(--display); padding-top: 8px; margin-top: 4px; border-top: 1px dashed var(--linea); }
+    .btn-wa { width: 100%; margin-top: 14px; background: #25d366; color: #fff; border: 0; border-radius: 12px; padding: 14px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: var(--texto); display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-wa:hover { background: #1eb959; }
+    .btn-wa:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .btn-finalizar { width: 100%; margin-top: 14px; background: var(--esmeralda); color: #fff; border: 0; border-radius: 12px; padding: 14px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: var(--texto); }
+    .btn-finalizar:hover { background: var(--esmeralda-osc); }
+    .btn-wa2 { width: 100%; margin-top: 8px; background: #fff; color: #1eb959; border: 1px solid #25d366; border-radius: 12px; padding: 11px; font-weight: 700; font-size: 13.5px; cursor: pointer; font-family: var(--texto); display: flex; align-items: center; justify-content: center; gap: 7px; }
+    .btn-wa2:hover { background: #f0fdf4; }
+    .cajon-vacio { text-align: center; color: var(--gris); padding: 50px 20px; }
+    .aviso-wa { font-size: 11.5px; color: var(--gris); text-align: center; margin-top: 8px; }
+
+    /* ---- Checkout paso a paso ---- */
+    .co-capa { position: fixed; inset: 0; background: rgba(15,23,42,.55); z-index: 70; display: none; place-content: center; padding: 18px; overflow-y: auto; }
+    .co-capa.abierto { display: grid; }
+    .co { background: var(--blanco); border-radius: var(--radio); max-width: 460px; width: 100%; max-height: 92vh; overflow-y: auto; align-self: center; }
+    .co-top { padding: 18px 22px 0; }
+    .co-pasos { display: flex; gap: 6px; margin-bottom: 4px; }
+    .co-paso { flex: 1; height: 5px; border-radius: 999px; background: var(--linea); }
+    .co-paso.on { background: var(--esmeralda); }
+    .co-tit { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 12px 0 2px; }
+    .co-sub { color: var(--gris); font-size: 13px; margin-bottom: 4px; }
+    .co-cuerpo { padding: 8px 22px 4px; }
+    .co-lbl { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 5px; }
+    .co-lbl .req { color: #b91c1c; }
+    .co-input, .co-area { width: 100%; border: 1px solid var(--linea); border-radius: 10px; padding: 11px 12px; font-size: 14px; font-family: var(--texto); outline: 0; }
+    .co-input:focus, .co-area:focus { border-color: var(--esmeralda); }
+    .co-area { resize: vertical; min-height: 64px; }
+    .co-pago { display: flex; align-items: center; gap: 11px; border: 1px solid var(--linea); border-radius: 12px; padding: 13px 14px; margin-top: 10px; cursor: pointer; font-size: 14px; }
+    .co-pago.sel { border-color: var(--esmeralda); background: var(--esmeralda-suave); }
+    .co-pago.dis { opacity: .55; cursor: not-allowed; }
+    .co-pago .co-pago-nom { font-weight: 600; }
+    .co-pago .co-pago-desc { font-size: 12px; color: var(--gris); }
+    .co-pago .tag { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--gris); background: var(--fondo); border: 1px solid var(--linea); border-radius: 999px; padding: 3px 9px; }
+    .co-resumen { background: var(--fondo); border-radius: 12px; padding: 14px 16px; margin-top: 10px; font-size: 14px; }
+    .co-resumen .rl { display: flex; justify-content: space-between; padding: 3px 0; color: var(--gris); }
+    .co-resumen .rl.tot { color: var(--tinta); font-weight: 700; font-size: 17px; font-family: var(--display); border-top: 1px dashed var(--linea); margin-top: 6px; padding-top: 8px; }
+    .co-resumen .rl b { color: var(--tinta); font-weight: 600; }
+    .co-err { background: #fef2f2; color: #b91c1c; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-top: 12px; }
+    .co-pie { display: flex; gap: 10px; padding: 16px 22px 20px; }
+    .co-btn { flex: 1; border-radius: 12px; padding: 13px; font-weight: 700; font-size: 14.5px; cursor: pointer; font-family: var(--texto); border: 1px solid var(--linea); background: #fff; color: var(--tinta); }
+    .co-btn.prim { background: var(--esmeralda); color: #fff; border-color: var(--esmeralda); flex: 1.4; }
+    .co-btn.prim:hover { background: var(--esmeralda-osc); }
+    .co-btn.prim:disabled { background: #cbd5e1; border-color: #cbd5e1; cursor: not-allowed; }
+    .co-ok { text-align: center; padding: 30px 24px 8px; }
+    .co-ok-ico { width: 64px; height: 64px; border-radius: 999px; background: var(--esmeralda-suave); color: var(--esmeralda-osc); display: grid; place-content: center; margin: 0 auto 14px; font-size: 34px; }
+    .co-ok h3 { font-family: var(--display); font-size: 22px; margin: 0 0 4px; }
+    .co-ok .folio { font-family: var(--display); font-size: 16px; color: var(--esmeralda-osc); font-weight: 700; }
+    .co-banco { background: var(--fondo); border: 1px dashed var(--linea); border-radius: 12px; padding: 14px; margin: 16px 0 4px; text-align: left; font-size: 13.5px; white-space: pre-wrap; }
+    .co-banco b { font-family: var(--display); }
+
+    /* ---- Modal de producto ---- */
+    .modal-capa { position: fixed; inset: 0; background: rgba(15,23,42,.55); z-index: 60; display: none; place-content: center; padding: 20px; }
+    .modal-capa.abierto { display: grid; }
+    .modal { background: var(--blanco); border-radius: var(--radio); max-width: 720px; width: 100%; max-height: 88vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; }
+    .modal-img { background: #f1f5f9; display: grid; place-content: center; min-height: 300px; }
+    .modal-img img { width: 100%; height: 100%; object-fit: contain; padding: 24px; max-height: 420px; }
+    .modal-info { padding: 26px; position: relative; }
+    .modal-x { position: absolute; top: 14px; right: 16px; background: 0; border: 0; font-size: 24px; cursor: pointer; color: var(--gris); }
+    .modal-cat { font-size: 12px; color: var(--gris); }
+    .modal-nom { font-family: var(--display); font-size: 22px; font-weight: 700; margin: 4px 0 12px; }
+    .modal-desc { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 18px; }
+    .modal-precio { font-family: var(--display); font-size: 28px; font-weight: 700; color: var(--esmeralda-osc); margin-bottom: 16px; }
+
+    .pie { text-align: center; color: var(--gris); font-size: 12.5px; padding: 30px 20px; border-top: 1px solid var(--linea); }
+
+    @media (min-width: 560px) { .marca-tag { display: block; } }
+    @media (max-width: 620px) { .modal { grid-template-columns: 1fr; } .modal-img { min-height: 220px; } }
+  </style>
+</head>
+<body>
+  <header class="tope">
+    <div class="tope-int">
+      <div class="marca">
+        <span class="marca-logo">mar<span>bit</span></span>
+        <span class="marca-tag">cómputo · electrónica · reparación</span>
+      </div>
+      <div class="crece"></div>
+      <div class="auth-zona" id="authZona"></div>
+      <button class="btn-carrito" id="abrirCarrito">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Carrito <span class="carrito-num" id="carritoNum" style="display:none">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="banda">
+    <div class="banda-int">
+      <h1>Tienda en línea</h1>
+      <p>Cómputo, electrónica y accesorios en Valle de Bravo. Recoge en tienda o recibe a domicilio.</p>
+      <div class="buscador">
+        <input id="busqueda" type="search" placeholder="Buscar productos…" autocomplete="off" />
+      </div>
+    </div>
+  </section>
+
+  <main class="cuerpo">
+    <div class="cats" id="cats"></div>
+    <div id="contenido"><div class="estado">Cargando catálogo…</div></div>
+  </main>
+
+  <footer class="pie">
+    Marbit · Porfirio Díaz 101, Col. Centro, Valle de Bravo, Edo. de México · <span id="pieWa"></span>
+  </footer>
+
+  <!-- Carrito -->
+  <div class="capa" id="capaCarrito"></div>
+  <aside class="cajon" id="cajon">
+    <div class="cajon-top"><h3>Tu carrito</h3><button class="cajon-x" id="cerrarCarrito">✕</button></div>
+    <div class="cajon-items" id="cajonItems"></div>
+    <div class="cajon-pie" id="cajonPie"></div>
+  </aside>
+
+  <!-- Modal producto -->
+  <div class="modal-capa" id="modalCapa">
+    <div class="modal" id="modal"></div>
+  </div>
+
+  <!-- Checkout paso a paso -->
+  <div class="co-capa" id="coCapa">
+    <div class="co" id="co"></div>
+  </div>
+
+  <!-- Cuenta (login / registro) -->
+  <div class="auth-capa" id="authCapa">
+    <div class="auth" id="auth"></div>
+  </div>
+
+  <script>
+    // ===== Configuración =====
+    const API = 'https://pos-api-4d34.onrender.com/api';
+    const money = (n) => n == null ? null : '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const estado = {
+      config: null,
+      categorias: [],
+      productos: [],
+      total: 0,
+      pagina: 1,
+      q: '',
+      categoriaId: null,
+      carrito: cargarCarrito(),
+      entrega: 'recoger', // 'recoger' o id de zona (número)
+      sesion: cargarSesion(),
+    };
+
+    function cargarCarrito() {
+      try { return JSON.parse(localStorage.getItem('marbit_carrito') || '[]'); } catch { return []; }
+    }
+    function guardarCarrito() {
+      try { localStorage.setItem('marbit_carrito', JSON.stringify(estado.carrito)); } catch {}
+    }
+
+    function cargarSesion() {
+      try {
+        const token = localStorage.getItem('marbit_token');
+        const cliente = JSON.parse(localStorage.getItem('marbit_cliente') || 'null');
+        return token && cliente ? { token, cliente } : null;
+      } catch { return null; }
+    }
+    function guardarSesion(token, cliente) {
+      estado.sesion = { token, cliente };
+      try { localStorage.setItem('marbit_token', token); localStorage.setItem('marbit_cliente', JSON.stringify(cliente)); } catch {}
+      renderAuthZona();
+    }
+    function cerrarSesion() {
+      estado.sesion = null;
+      try { localStorage.removeItem('marbit_token'); localStorage.removeItem('marbit_cliente'); } catch {}
+      renderAuthZona();
+    }
+
+    async function api(ruta) {
+      const r = await fetch(API + ruta);
+      if (!r.ok) throw new Error('Error ' + r.status);
+      return r.json();
+    }
+
+    // ===== Carga inicial =====
+    async function iniciar() {
+      renderAuthZona();
+      verificarSesion();
+      revisarRetornoPago();
+      try {
+        estado.config = await api('/tienda/publica');
+      } catch (e) {
+        estado.config = { tiendaActiva: true, zonas: [], montoEnvioGratis: 0, whatsapp: null };
+      }
+      const wa = estado.config.whatsapp;
+      document.getElementById('pieWa').textContent = wa ? ('WhatsApp ' + wa) : '';
+
+      if (estado.config.tiendaActiva === false) {
+        document.getElementById('contenido').innerHTML =
+          '<div class="estado"><h2 style="font-family:var(--display)">Volvemos pronto</h2><p>La tienda está temporalmente en mantenimiento. Escríbenos por WhatsApp para tomar tu pedido.</p></div>';
+        return;
+      }
+
+      try {
+        estado.categorias = await api('/publico/categorias');
+        renderCategorias();
+      } catch {}
+
+      await cargarCatalogo(true);
+      renderCarrito();
+    }
+
+    async function cargarCatalogo(reset) {
+      if (reset) { estado.pagina = 1; }
+      const cont = document.getElementById('contenido');
+      if (reset) cont.innerHTML = '<div class="estado">Cargando productos…</div>';
+      const params = new URLSearchParams();
+      if (estado.q) params.set('q', estado.q);
+      if (estado.categoriaId) params.set('categoriaId', estado.categoriaId);
+      params.set('pagina', estado.pagina);
+      try {
+        const data = await api('/publico/catalogo?' + params.toString());
+        estado.total = data.total;
+        estado.productos = reset ? data.items : estado.productos.concat(data.items);
+        renderCatalogo();
+      } catch (e) {
+        cont.innerHTML = '<div class="estado">No pudimos cargar el catálogo. Intenta de nuevo en un momento.</div>';
+      }
+    }
+
+    // ===== Render catálogo =====
+    function renderCategorias() {
+      const cats = document.getElementById('cats');
+      let html = '<button class="chip ' + (estado.categoriaId == null ? 'activo' : '') + '" data-cat="">Todo</button>';
+      for (const c of estado.categorias) {
+        html += '<button class="chip ' + (estado.categoriaId == c.id ? 'activo' : '') + '" data-cat="' + c.id + '">' + escapar(c.nombre) + '</button>';
+      }
+      cats.innerHTML = html;
+      cats.querySelectorAll('.chip').forEach((b) => b.addEventListener('click', () => {
+        estado.categoriaId = b.dataset.cat ? Number(b.dataset.cat) : null;
+        renderCategorias();
+        cargarCatalogo(true);
+      }));
+    }
+
+    function renderCatalogo() {
+      const cont = document.getElementById('contenido');
+      if (!estado.productos.length) {
+        cont.innerHTML = '<div class="estado">No encontramos productos' + (estado.q ? ' para "' + escapar(estado.q) + '"' : '') + '.</div>';
+        return;
+      }
+      let html = '<div class="rejilla">';
+      for (const p of estado.productos) {
+        const precio = money(p.precio);
+        html += '<div class="prod">' +
+          '<div class="prod-img" data-ver="' + p.id + '">' + (p.imagenUrl ? '<img src="' + escapar(p.imagenUrl) + '" alt="' + escapar(p.nombre) + '" loading="lazy" onerror="this.parentNode.innerHTML=\'<span class=&quot;sin&quot;>Sin imagen</span>\'"/>' : '<span class="sin">Sin imagen</span>') + '</div>' +
+          '<div class="prod-cuerpo">' +
+            '<div class="prod-nom" data-ver="' + p.id + '">' + escapar(p.nombre) + '</div>' +
+            (p.categoria ? '<div class="prod-cat">' + escapar(p.categoria.nombre) + '</div>' : '') +
+            '<div class="prod-pie">' +
+              (precio ? '<span class="prod-precio">' + precio + '</span>' : '<span class="prod-precio consultar">Consultar precio</span>') +
+              (p.disponible
+                ? '<button class="btn-add" data-add="' + p.id + '">Agregar</button>'
+                : '<span class="agotado">Agotado</span>') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }
+      html += '</div>';
+      if (estado.productos.length < estado.total) html += '<button class="vermas" id="vermas">Ver más productos</button>';
+      cont.innerHTML = html;
+
+      cont.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => agregar(Number(b.dataset.add))));
+      cont.querySelectorAll('[data-ver]').forEach((b) => b.addEventListener('click', () => verProducto(Number(b.dataset.ver))));
+      const vm = document.getElementById('vermas');
+      if (vm) vm.addEventListener('click', () => { estado.pagina++; cargarCatalogo(false); });
+    }
+
+    // ===== Carrito =====
+    function agregar(id) {
+      const p = estado.productos.find((x) => x.id === id);
+      if (!p) return;
+      const e = estado.carrito.find((x) => x.id === id);
+      if (e) e.cantidad++;
+      else estado.carrito.push({ id: p.id, nombre: p.nombre, precio: p.precio, imagenUrl: p.imagenUrl, cantidad: 1 });
+      guardarCarrito();
+      renderCarrito();
+      abrirCarrito();
+    }
+    function cambiarCantidad(id, delta) {
+      const e = estado.carrito.find((x) => x.id === id);
+      if (!e) return;
+      e.cantidad += delta;
+      if (e.cantidad <= 0) estado.carrito = estado.carrito.filter((x) => x.id !== id);
+      guardarCarrito();
+      renderCarrito();
+    }
+    function quitar(id) {
+      estado.carrito = estado.carrito.filter((x) => x.id !== id);
+      guardarCarrito();
+      renderCarrito();
+    }
+
+    function subtotal() {
+      return estado.carrito.reduce((s, x) => s + (Number(x.precio) || 0) * x.cantidad, 0);
+    }
+    function zonaElegida() {
+      if (estado.entrega === 'recoger') return { nombre: 'Recoger en tienda', costo: 0 };
+      const z = (estado.config.zonas || []).find((z) => z.id === estado.entrega);
+      return z ? { nombre: z.nombre, costo: Number(z.costo) } : { nombre: 'Recoger en tienda', costo: 0 };
+    }
+    function costoEnvio() {
+      const z = zonaElegida();
+      if (z.costo <= 0) return 0;
+      const umbral = Number(estado.config.montoEnvioGratis) || 0;
+      if (umbral > 0 && subtotal() >= umbral) return 0; // envío gratis por monto
+      return z.costo;
+    }
+
+    function renderCarrito() {
+      const num = estado.carrito.reduce((s, x) => s + x.cantidad, 0);
+      const badge = document.getElementById('carritoNum');
+      badge.textContent = num;
+      badge.style.display = num ? 'grid' : 'none';
+
+      const items = document.getElementById('cajonItems');
+      const pie = document.getElementById('cajonPie');
+
+      if (!estado.carrito.length) {
+        items.innerHTML = '<div class="cajon-vacio">Tu carrito está vacío.<br>Agrega productos para empezar.</div>';
+        pie.innerHTML = '';
+        return;
+      }
+
+      items.innerHTML = estado.carrito.map((x) =>
+        '<div class="ci">' +
+          (x.imagenUrl ? '<img class="ci-img" src="' + escapar(x.imagenUrl) + '" onerror="this.style.visibility=\'hidden\'"/>' : '<div class="ci-img"></div>') +
+          '<div class="ci-info">' +
+            '<div class="ci-nom">' + escapar(x.nombre) + '</div>' +
+            '<div class="ci-precio">' + (x.precio != null ? money(x.precio) : 'Precio a confirmar') + '</div>' +
+            '<div class="ci-controles">' +
+              '<button data-menos="' + x.id + '">−</button>' +
+              '<span>' + x.cantidad + '</span>' +
+              '<button data-mas="' + x.id + '">+</button>' +
+              '<button class="ci-quitar" data-quitar="' + x.id + '">Quitar</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      ).join('');
+
+      const sub = subtotal();
+      const wa = estado.config.whatsapp;
+
+      pie.innerHTML =
+        '<div class="totales">' +
+          '<div class="fila total"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
+        '</div>' +
+        '<div class="aviso-wa" style="margin:6px 0 2px">La entrega y el envío se eligen al finalizar.</div>' +
+        '<button class="btn-finalizar" id="finalizar">Finalizar pedido</button>' +
+        (wa ? '<button class="btn-wa2" id="finalizarWa"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/></svg>Pedir por WhatsApp</button>' : '');
+
+      items.querySelectorAll('[data-mas]').forEach((b) => b.addEventListener('click', () => cambiarCantidad(Number(b.dataset.mas), 1)));
+      items.querySelectorAll('[data-menos]').forEach((b) => b.addEventListener('click', () => cambiarCantidad(Number(b.dataset.menos), -1)));
+      items.querySelectorAll('[data-quitar]').forEach((b) => b.addEventListener('click', () => quitar(Number(b.dataset.quitar))));
+      const fin = document.getElementById('finalizar');
+      if (fin) fin.addEventListener('click', abrirCheckout);
+      const finWa = document.getElementById('finalizarWa');
+      if (finWa) finWa.addEventListener('click', finalizarWhatsApp);
+    }
+
+    function finalizarWhatsApp() {
+      const wa = (estado.config.whatsapp || '').replace(/\D/g, '');
+      if (!wa) return;
+      const numero = wa.length === 10 ? '52' + wa : wa;
+      const sub = subtotal();
+      const envio = costoEnvio();
+      const z = zonaElegida();
+
+      let txt = 'Hola Marbit, quiero hacer un pedido:\n\n';
+      for (const x of estado.carrito) {
+        txt += '• ' + x.cantidad + ' x ' + x.nombre + (x.precio != null ? ' — ' + money(Number(x.precio) * x.cantidad) : '') + '\n';
+      }
+      txt += '\nSubtotal: ' + money(sub);
+      txt += '\nEntrega: ' + z.nombre + (envio > 0 ? ' (' + money(envio) + ')' : ' (gratis)');
+      txt += '\nTotal: ' + money(sub + envio);
+      txt += '\n\n¿Me confirmas disponibilidad y forma de pago? Gracias.';
+
+      window.open('https://wa.me/' + numero + '?text=' + encodeURIComponent(txt), '_blank');
+    }
+
+    // ===== Regreso desde Mercado Pago =====
+    function revisarRetornoPago() {
+      const params = new URLSearchParams(location.search);
+      const pago = params.get('pago');
+      const pedido = params.get('pedido');
+      if (!pago) return;
+      history.replaceState(null, '', location.pathname); // limpia la URL
+      let titulo, msg, icono, color;
+      if (pago === 'aprobado') {
+        titulo = '¡Pago aprobado!'; icono = '✓'; color = 'var(--esmeralda-osc)';
+        msg = 'Tu pedido' + (pedido ? ' #' + pedido : '') + ' fue pagado correctamente. Te contactaremos para coordinar la entrega.';
+        estado.carrito = []; guardarCarrito(); renderCarrito();
+      } else if (pago === 'pendiente') {
+        titulo = 'Pago en proceso'; icono = '⏳'; color = 'var(--ambar)';
+        msg = 'Tu pago' + (pedido ? ' del pedido #' + pedido : '') + ' está en revisión. Te avisaremos en cuanto se confirme.';
+        estado.carrito = []; guardarCarrito(); renderCarrito();
+      } else {
+        titulo = 'Pago no completado'; icono = '✕'; color = '#b91c1c';
+        msg = 'El pago' + (pedido ? ' del pedido #' + pedido : '') + ' no se concretó. Si quieres, intenta de nuevo o elige otra forma de pago.';
+      }
+      mostrarResultadoPago(titulo, msg, icono, color);
+    }
+
+    function mostrarResultadoPago(titulo, msg, icono, color) {
+      const cont = document.getElementById('co');
+      cont.innerHTML =
+        '<div class="co-ok">' +
+          '<div class="co-ok-ico" style="background:transparent;color:' + color + ';font-size:46px">' + icono + '</div>' +
+          '<h3>' + escapar(titulo) + '</h3>' +
+          '<p class="co-sub" style="margin-top:10px">' + escapar(msg) + '</p>' +
+        '</div>' +
+        '<div class="co-pie"><button class="co-btn prim" id="coResOk">Listo</button></div>';
+      document.getElementById('coCapa').classList.add('abierto');
+      document.getElementById('coResOk').addEventListener('click', () => document.getElementById('coCapa').classList.remove('abierto'));
+    }
+
+    // ===== Cuenta (login / registro) =====
+    const auth = { modo: 'login', cargando: false, error: '', continuar: false };
+
+    function renderAuthZona() {
+      const z = document.getElementById('authZona');
+      if (!z) return;
+      if (estado.sesion) {
+        const nombre = (estado.sesion.cliente.nombre || '').split(' ')[0];
+        z.innerHTML = '<span class="cuenta-nom">Hola, <span>' + escapar(nombre) + '</span></span><button class="btn-salir" id="salirBtn">Cerrar sesión</button>';
+        document.getElementById('salirBtn').addEventListener('click', cerrarSesion);
+      } else {
+        z.innerHTML = '<button class="btn-cuenta" id="loginBtn">Iniciar sesión</button>';
+        document.getElementById('loginBtn').addEventListener('click', () => abrirAuth(false));
+      }
+    }
+
+    async function verificarSesion() {
+      if (!estado.sesion) return;
+      try {
+        const r = await fetch(API + '/cuenta/perfil', { headers: { Authorization: 'Bearer ' + estado.sesion.token } });
+        if (!r.ok) { cerrarSesion(); return; }
+        guardarSesion(estado.sesion.token, await r.json());
+      } catch { /* sin conexión: conservamos la sesión local */ }
+    }
+
+    function abrirAuth(continuarCheckout) {
+      auth.modo = 'login'; auth.error = ''; auth.cargando = false; auth.continuar = !!continuarCheckout;
+      document.getElementById('authCapa').classList.add('abierto');
+      renderAuth();
+    }
+    function cerrarAuth() { document.getElementById('authCapa').classList.remove('abierto'); }
+
+    function renderAuth() {
+      const cont = document.getElementById('auth');
+      const esLogin = auth.modo === 'login';
+      cont.innerHTML =
+        '<div class="auth-top">' +
+          '<button class="auth-x" id="authX">✕</button>' +
+          '<div class="auth-tabs">' +
+            '<button class="auth-tab ' + (esLogin ? 'on' : '') + '" data-modo="login">Iniciar sesión</button>' +
+            '<button class="auth-tab ' + (!esLogin ? 'on' : '') + '" data-modo="registro">Crear cuenta</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="auth-cuerpo">' +
+          (auth.continuar ? '<p class="auth-intro">Inicia sesión o crea tu cuenta para finalizar tu pedido.</p>' : '') +
+          (esLogin
+            ? '<label class="auth-lbl">Correo</label><input class="auth-input" id="aCorreo" type="email" inputmode="email" placeholder="tucorreo@ejemplo.com" />' +
+              '<label class="auth-lbl">Contraseña</label><input class="auth-input" id="aPass" type="password" placeholder="Tu contraseña" />'
+            : '<label class="auth-lbl">Nombre completo</label><input class="auth-input" id="aNombre" placeholder="Tu nombre" />' +
+              '<label class="auth-lbl">Correo</label><input class="auth-input" id="aCorreo" type="email" inputmode="email" placeholder="tucorreo@ejemplo.com" />' +
+              '<label class="auth-lbl">Teléfono (WhatsApp)</label><input class="auth-input" id="aTel" inputmode="tel" placeholder="722 000 0000" />' +
+              '<label class="auth-lbl">Contraseña</label><input class="auth-input" id="aPass" type="password" placeholder="Mínimo 6 caracteres" />') +
+          (auth.error ? '<div class="auth-err">' + escapar(auth.error) + '</div>' : '') +
+        '</div>' +
+        '<div class="auth-pie">' +
+          '<button class="auth-btn" id="authEnviar"' + (auth.cargando ? ' disabled' : '') + '>' + (auth.cargando ? 'Un momento…' : (esLogin ? 'Entrar' : 'Crear cuenta')) + '</button>' +
+        '</div>';
+      document.getElementById('authX').addEventListener('click', cerrarAuth);
+      cont.querySelectorAll('.auth-tab').forEach((b) => b.addEventListener('click', () => { auth.modo = b.dataset.modo; auth.error = ''; renderAuth(); }));
+      document.getElementById('authEnviar').addEventListener('click', enviarAuth);
+      cont.querySelectorAll('.auth-input').forEach((inp) => inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); enviarAuth(); } }));
+    }
+
+    async function enviarAuth() {
+      const esLogin = auth.modo === 'login';
+      const correo = (document.getElementById('aCorreo')?.value || '').trim();
+      const pass = document.getElementById('aPass')?.value || '';
+      if (!correo || !pass) { auth.error = 'Captura tu correo y contraseña.'; renderAuth(); return; }
+      let body, ruta;
+      if (esLogin) { ruta = '/cuenta/login'; body = { correo, password: pass }; }
+      else {
+        const nombre = (document.getElementById('aNombre')?.value || '').trim();
+        const telefono = (document.getElementById('aTel')?.value || '').trim();
+        if (!nombre) { auth.error = 'Escribe tu nombre.'; renderAuth(); return; }
+        if (pass.length < 6) { auth.error = 'La contraseña debe tener al menos 6 caracteres.'; renderAuth(); return; }
+        ruta = '/cuenta/registro'; body = { nombre, correo, telefono: telefono || undefined, password: pass };
+      }
+      auth.cargando = true; auth.error = ''; renderAuth();
+      try {
+        const r = await fetch(API + ruta, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        const data = await r.json();
+        if (!r.ok) throw new Error(Array.isArray(data.message) ? data.message.join(' ') : (data.message || 'No se pudo completar.'));
+        guardarSesion(data.token, data.cliente);
+        cerrarAuth();
+        if (auth.continuar) abrirCheckout();
+      } catch (e) {
+        auth.cargando = false;
+        auth.error = e.message || 'No se pudo completar. Intenta de nuevo.';
+        renderAuth();
+      }
+    }
+
+    // ===== Checkout paso a paso =====
+    const co = { paso: 1, nombre: '', telefono: '', correo: '', direccion: '', metodoPago: '', notas: '', enviando: false, error: '', resultado: null };
+
+    function abrirCheckout() {
+      if (!estado.carrito.length) return;
+      if (!estado.sesion) { abrirAuth(true); return; } // registro obligatorio para comprar
+      co.paso = 1; co.error = ''; co.resultado = null; co.enviando = false;
+      // Prellenar con los datos de la cuenta
+      co.nombre = estado.sesion.cliente.nombre || co.nombre;
+      co.correo = estado.sesion.cliente.correo || co.correo;
+      co.telefono = estado.sesion.cliente.telefono || co.telefono;
+      const pg = estado.config.pagos || {};
+      co.metodoPago = pg.transferencia ? 'TRANSFERENCIA' : (pg.contraEntrega ? 'CONTRA_ENTREGA' : '');
+      document.getElementById('coCapa').classList.add('abierto');
+      renderCheckout();
+    }
+    function cerrarCheckout() { document.getElementById('coCapa').classList.remove('abierto'); }
+
+    function pasosBarra(n) {
+      let h = '<div class="co-pasos">';
+      for (let i = 1; i <= 3; i++) h += '<div class="co-paso ' + (i <= n ? 'on' : '') + '"></div>';
+      return h + '</div>';
+    }
+
+    function pagoOpcion(valor, nombre, desc, deshabilitado) {
+      const sel = co.metodoPago === valor && !deshabilitado;
+      return '<div class="co-pago ' + (sel ? 'sel' : '') + (deshabilitado ? ' dis' : '') + '" data-pago="' + valor + '">' +
+        '<input type="radio" ' + (sel ? 'checked' : '') + ' ' + (deshabilitado ? 'disabled' : '') + ' />' +
+        '<div><div class="co-pago-nom">' + nombre + '</div><div class="co-pago-desc">' + desc + '</div></div>' +
+        (deshabilitado ? '<span class="tag">Próximamente</span>' : '') +
+      '</div>';
+    }
+
+    function renderCheckout() {
+      const cont = document.getElementById('co');
+      const esDomicilio = estado.entrega !== 'recoger';
+      const z = zonaElegida();
+      const sub = subtotal();
+      const envio = costoEnvio();
+      const total = sub + envio;
+
+      if (co.resultado) { renderCheckoutOk(); return; }
+
+      if (co.paso === 1) {
+        const zonas = estado.config.zonas || [];
+        let ops = '<label class="entrega-op"><input type="radio" name="coEntrega" value="recoger" ' + (estado.entrega === 'recoger' ? 'checked' : '') + '><span>Recoger en tienda</span><span class="costo">Gratis</span></label>';
+        for (const zz of zonas) {
+          ops += '<label class="entrega-op"><input type="radio" name="coEntrega" value="' + zz.id + '" ' + (estado.entrega === zz.id ? 'checked' : '') + '><span>' + escapar(zz.nombre) + '</span><span class="costo">' + (Number(zz.costo) > 0 ? money(zz.costo) : 'Gratis') + '</span></label>';
+        }
+        cont.innerHTML =
+          '<div class="co-top">' + pasosBarra(1) +
+            '<div class="co-tit">Entrega y tus datos</div>' +
+            '<div class="co-sub">Paso 1 de 3 · ¿Cómo lo recibes y a nombre de quién?</div>' +
+          '</div>' +
+          '<div class="co-cuerpo">' +
+            '<label class="co-lbl">¿Cómo quieres recibir tu pedido?</label>' +
+            '<div class="entrega-ops" style="max-height:none">' + ops + '</div>' +
+            (esDomicilio ? '<label class="co-lbl">Dirección de entrega <span class="req">*</span></label><textarea class="co-area" id="coDir" placeholder="Calle, número, colonia, referencias…">' + escapar(co.direccion) + '</textarea>' : '') +
+            '<label class="co-lbl">Nombre completo <span class="req">*</span></label>' +
+            '<input class="co-input" id="coNombre" value="' + escapar(co.nombre) + '" placeholder="Tu nombre" />' +
+            '<label class="co-lbl">Teléfono (WhatsApp)</label>' +
+            '<input class="co-input" id="coTel" inputmode="tel" value="' + escapar(co.telefono) + '" placeholder="722 000 0000" />' +
+            '<label class="co-lbl">Correo</label>' +
+            '<input class="co-input" id="coCorreo" inputmode="email" value="' + escapar(co.correo) + '" placeholder="tucorreo@ejemplo.com" />' +
+            (co.error ? '<div class="co-err">' + escapar(co.error) + '</div>' : '') +
+          '</div>' +
+          '<div class="co-pie">' +
+            '<button class="co-btn" id="coCancelar">Cancelar</button>' +
+            '<button class="co-btn prim" id="coCont1">Continuar</button>' +
+          '</div>';
+        const capturar = () => {
+          const n = document.getElementById('coNombre'); if (n) co.nombre = n.value.trim();
+          const t = document.getElementById('coTel'); if (t) co.telefono = t.value.trim();
+          const c = document.getElementById('coCorreo'); if (c) co.correo = c.value.trim();
+          const d = document.getElementById('coDir'); if (d) co.direccion = d.value.trim();
+        };
+        cont.querySelectorAll('input[name="coEntrega"]').forEach((r) => r.addEventListener('change', () => {
+          capturar();
+          estado.entrega = r.value === 'recoger' ? 'recoger' : Number(r.value);
+          co.error = '';
+          renderCheckout();
+        }));
+        document.getElementById('coCancelar').addEventListener('click', cerrarCheckout);
+        document.getElementById('coCont1').addEventListener('click', () => {
+          capturar();
+          if (!co.nombre) { co.error = 'Escribe tu nombre para continuar.'; renderCheckout(); return; }
+          if (estado.entrega !== 'recoger' && !co.direccion) { co.error = 'Escribe la dirección de entrega.'; renderCheckout(); return; }
+          co.error = ''; co.paso = 2; renderCheckout();
+        });
+        return;
+      }
+
+      if (co.paso === 2) {
+        const pg = estado.config.pagos || {};
+        let pagos = '';
+        if (pg.transferencia) pagos += pagoOpcion('TRANSFERENCIA', 'Transferencia o depósito', 'Te damos los datos bancarios al confirmar', false);
+        if (pg.contraEntrega) pagos += pagoOpcion('CONTRA_ENTREGA', 'Pago al recoger o recibir', 'Pagas en efectivo o tarjeta al momento', false);
+        if (pg.mercadoPago) pagos += pagoOpcion('MERCADO_PAGO', 'Tarjeta (Mercado Pago)', 'Pago en línea con tarjeta, débito o crédito', false);
+
+        cont.innerHTML =
+          '<div class="co-top">' + pasosBarra(2) +
+            '<div class="co-tit">Forma de pago</div>' +
+            '<div class="co-sub">Paso 2 de 3 · ¿Cómo quieres pagar?</div>' +
+          '</div>' +
+          '<div class="co-cuerpo">' +
+            pagos +
+            '<label class="co-lbl">Notas (opcional)</label>' +
+            '<textarea class="co-area" id="coNotas" placeholder="Algún comentario para tu pedido…">' + escapar(co.notas) + '</textarea>' +
+            (co.error ? '<div class="co-err">' + escapar(co.error) + '</div>' : '') +
+          '</div>' +
+          '<div class="co-pie">' +
+            '<button class="co-btn" id="coAtras2">Atrás</button>' +
+            '<button class="co-btn prim" id="coCont2"' + (co.metodoPago ? '' : ' disabled') + '>Continuar</button>' +
+          '</div>';
+        cont.querySelectorAll('[data-pago]').forEach((el) => el.addEventListener('click', () => {
+          if (el.classList.contains('dis')) return;
+          co.metodoPago = el.dataset.pago; co.error = ''; renderCheckout();
+        }));
+        document.getElementById('coAtras2').addEventListener('click', () => { co.notas = document.getElementById('coNotas').value.trim(); co.error = ''; co.paso = 1; renderCheckout(); });
+        document.getElementById('coCont2').addEventListener('click', () => {
+          co.notas = document.getElementById('coNotas').value.trim();
+          if (!co.metodoPago) { co.error = 'Elige una forma de pago.'; renderCheckout(); return; }
+          co.error = ''; co.paso = 3; renderCheckout();
+        });
+        return;
+      }
+
+      if (co.paso === 3) {
+        const pagoTxt = { TRANSFERENCIA: 'Transferencia o depósito', CONTRA_ENTREGA: 'Pago al recoger / recibir', MERCADO_PAGO: 'Tarjeta (Mercado Pago)' }[co.metodoPago] || co.metodoPago;
+        cont.innerHTML =
+          '<div class="co-top">' + pasosBarra(3) +
+            '<div class="co-tit">Confirma tu pedido</div>' +
+            '<div class="co-sub">Paso 3 de 3 · Revisa que todo esté bien</div>' +
+          '</div>' +
+          '<div class="co-cuerpo">' +
+            '<div class="co-resumen">' +
+              estado.carrito.map((x) => '<div class="rl"><span>' + x.cantidad + ' × ' + escapar(x.nombre) + '</span><b>' + (x.precio != null ? money(Number(x.precio) * x.cantidad) : '—') + '</b></div>').join('') +
+              '<div class="rl" style="margin-top:6px"><span>Cliente</span><b>' + escapar(co.nombre) + '</b></div>' +
+              '<div class="rl"><span>Entrega</span><b>' + escapar(z.nombre) + '</b></div>' +
+              (esDomicilio ? '<div class="rl"><span>Dirección</span><b>' + escapar(co.direccion) + '</b></div>' : '') +
+              '<div class="rl"><span>Pago</span><b>' + pagoTxt + '</b></div>' +
+              '<div class="rl"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
+              '<div class="rl"><span>Envío</span><span>' + (envio > 0 ? money(envio) : 'Gratis') + '</span></div>' +
+              '<div class="rl tot"><span>Total</span><span>' + money(total) + '</span></div>' +
+            '</div>' +
+            (co.error ? '<div class="co-err">' + escapar(co.error) + '</div>' : '') +
+          '</div>' +
+          '<div class="co-pie">' +
+            '<button class="co-btn" id="coAtras3"' + (co.enviando ? ' disabled' : '') + '>Atrás</button>' +
+            '<button class="co-btn prim" id="coConfirmar"' + (co.enviando ? ' disabled' : '') + '>' + (co.enviando ? 'Enviando…' : 'Confirmar pedido') + '</button>' +
+          '</div>';
+        document.getElementById('coAtras3').addEventListener('click', () => { if (!co.enviando) { co.paso = 2; co.error = ''; renderCheckout(); } });
+        document.getElementById('coConfirmar').addEventListener('click', enviarPedido);
+        return;
+      }
+    }
+
+    async function enviarPedido() {
+      co.enviando = true; co.error = ''; renderCheckout();
+      const esDomicilio = estado.entrega !== 'recoger';
+      const body = {
+        clienteNombre: co.nombre,
+        clienteTelefono: co.telefono || undefined,
+        clienteCorreo: co.correo || undefined,
+        metodoEntrega: esDomicilio ? 'DOMICILIO' : 'RECOGER',
+        zonaId: esDomicilio ? estado.entrega : undefined,
+        direccion: esDomicilio ? co.direccion : undefined,
+        metodoPago: co.metodoPago,
+        notas: co.notas || undefined,
+        items: estado.carrito.map((x) => ({ productoId: x.id, cantidad: x.cantidad })),
+      };
+      try {
+        const r = await fetch(API + '/publico/pedido', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(Array.isArray(data.message) ? data.message.join(' ') : (data.message || 'No se pudo crear el pedido.'));
+        if (data.initPoint) {
+          // Pago con tarjeta: el pedido ya quedó creado; redirigimos a Mercado Pago.
+          estado.carrito = [];
+          guardarCarrito();
+          window.location.href = data.initPoint;
+          return;
+        }
+        co.resultado = data;
+        estado.carrito = [];
+        guardarCarrito();
+        renderCarrito();
+        renderCheckout();
+      } catch (e) {
+        co.error = e.message || 'No se pudo crear el pedido. Intenta de nuevo.';
+        co.enviando = false;
+        renderCheckout();
+      }
+    }
+
+    function renderCheckoutOk() {
+      const cont = document.getElementById('co');
+      const d = co.resultado;
+      const esTransfer = d.metodoPago === 'TRANSFERENCIA';
+      const wa = (estado.config.whatsapp || '').replace(/\D/g, '');
+      const numero = wa ? (wa.length === 10 ? '52' + wa : wa) : '';
+      cont.innerHTML =
+        '<div class="co-ok">' +
+          '<div class="co-ok-ico">✓</div>' +
+          '<h3>¡Pedido recibido!</h3>' +
+          '<div class="folio">Pedido #' + d.id + '</div>' +
+          '<p class="co-sub" style="margin-top:8px">Total: <b>' + money(d.total) + '</b></p>' +
+          (esTransfer
+            ? '<div class="co-banco"><b>Para completar tu pedido, transfiere a:</b>\n\n' + escapar(d.datosBancarios || 'Te enviaremos los datos bancarios por WhatsApp.') + '\n\nDespués envíanos tu comprobante por WhatsApp con tu número de pedido.</div>'
+            : '<div class="co-banco">Tu pedido quedó registrado. Pagas al ' + (estado.entrega !== 'recoger' ? 'recibir' : 'recoger en la tienda') + '. Te contactaremos para confirmar.</div>') +
+        '</div>' +
+        '<div class="co-pie">' +
+          (numero ? '<button class="co-btn" id="coWaConf">Avisar por WhatsApp</button>' : '') +
+          '<button class="co-btn prim" id="coCerrarOk">Listo</button>' +
+        '</div>';
+      document.getElementById('coCerrarOk').addEventListener('click', () => { cerrarCheckout(); cerrarCarrito(); });
+      const waBtn = document.getElementById('coWaConf');
+      if (waBtn) waBtn.addEventListener('click', () => {
+        const txt = 'Hola Marbit, acabo de hacer el pedido #' + d.id + ' por ' + money(d.total) + '. ' + (esTransfer ? 'Les envío mi comprobante de transferencia.' : 'Quedo atento. Gracias.');
+        window.open('https://wa.me/' + numero + '?text=' + encodeURIComponent(txt), '_blank');
+      });
+    }
+
+    // ===== Modal de producto =====
+    async function verProducto(id) {
+      const capa = document.getElementById('modalCapa');
+      const modal = document.getElementById('modal');
+      modal.innerHTML = '<div style="padding:50px;text-align:center;color:var(--gris);grid-column:1/-1">Cargando…</div>';
+      capa.classList.add('abierto');
+      try {
+        const p = await api('/publico/producto/' + id);
+        const precio = money(p.precio);
+        modal.innerHTML =
+          '<div class="modal-img">' + (p.imagenUrl ? '<img src="' + escapar(p.imagenUrl) + '" alt="' + escapar(p.nombre) + '"/>' : '<span class="sin">Sin imagen</span>') + '</div>' +
+          '<div class="modal-info">' +
+            '<button class="modal-x" id="modalX">✕</button>' +
+            (p.categoria ? '<div class="modal-cat">' + escapar(p.categoria.nombre) + '</div>' : '') +
+            '<div class="modal-nom">' + escapar(p.nombre) + '</div>' +
+            (p.descripcion ? '<div class="modal-desc">' + escapar(p.descripcion) + '</div>' : '') +
+            (precio ? '<div class="modal-precio">' + precio + '</div>' : '<div class="modal-precio" style="font-size:16px;color:var(--gris)">Consultar precio</div>') +
+            (p.disponible
+              ? '<button class="btn-add" style="padding:13px 22px;font-size:15px" data-addmodal="' + p.id + '">Agregar al carrito</button>'
+              : '<span class="agotado" style="font-size:13px">Agotado por ahora</span>') +
+          '</div>';
+        document.getElementById('modalX').addEventListener('click', cerrarModal);
+        const am = modal.querySelector('[data-addmodal]');
+        if (am) am.addEventListener('click', () => { agregar(p.id); cerrarModal(); });
+      } catch {
+        modal.innerHTML = '<div style="padding:50px;text-align:center;grid-column:1/-1">No pudimos cargar el producto. <button class="modal-x" id="modalX" style="position:static;font-size:18px">Cerrar</button></div>';
+        document.getElementById('modalX').addEventListener('click', cerrarModal);
+      }
+    }
+    function cerrarModal() { document.getElementById('modalCapa').classList.remove('abierto'); }
+
+    // ===== Abrir/cerrar carrito =====
+    function abrirCarrito() {
+      document.getElementById('cajon').classList.add('abierto');
+      document.getElementById('capaCarrito').classList.add('abierta');
+    }
+    function cerrarCarrito() {
+      document.getElementById('cajon').classList.remove('abierto');
+      document.getElementById('capaCarrito').classList.remove('abierta');
+    }
+
+    // ===== Utilidades =====
+    function escapar(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+    let debounce;
+    document.getElementById('busqueda').addEventListener('input', (e) => {
+      clearTimeout(debounce);
+      debounce = setTimeout(() => { estado.q = e.target.value.trim(); cargarCatalogo(true); }, 350);
+    });
+    document.getElementById('abrirCarrito').addEventListener('click', abrirCarrito);
+    document.getElementById('cerrarCarrito').addEventListener('click', cerrarCarrito);
+    document.getElementById('capaCarrito').addEventListener('click', cerrarCarrito);
+    document.getElementById('modalCapa').addEventListener('click', (e) => { if (e.target.id === 'modalCapa') cerrarModal(); });
+
+    iniciar();
+  </script>
+</body>
+</html>
