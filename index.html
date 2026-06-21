@@ -61,6 +61,12 @@
     .auth-btn { width: 100%; background: var(--esmeralda); color: #fff; border: 0; border-radius: 12px; padding: 13px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: var(--texto); }
     .auth-btn:hover { background: var(--esmeralda-osc); }
     .auth-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .auth-benef { background: var(--esmeralda-suave); border: 1px solid var(--esmeralda); border-left: 4px solid var(--esmeralda); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; }
+    .auth-benef-tit { margin: 0 0 6px; font-weight: 700; font-size: 13.5px; color: var(--esmeralda-osc); }
+    .auth-benef ul { margin: 0; padding: 0; list-style: none; }
+    .auth-benef li { font-size: 13px; color: var(--tinta); padding: 2px 0; }
+    .auth-invitado { width: 100%; margin-top: 10px; background: none; border: 0; color: var(--gris); font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: var(--texto); text-decoration: underline; }
+    .auth-invitado:hover { color: var(--tinta); }
     .carrito-num { background: var(--ambar); color: #3b2a06; font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; border-radius: 999px; display: grid; place-content: center; padding: 0 5px; }
 
     /* ---- Banda de búsqueda ---- */
@@ -583,7 +589,7 @@
           '</div>' +
         '</div>' +
         '<div class="auth-cuerpo">' +
-          (auth.continuar ? '<p class="auth-intro">Inicia sesión o crea tu cuenta para finalizar tu pedido.</p>' : '') +
+          (auth.continuar ? '<div class="auth-benef"><p class="auth-benef-tit">Crea tu cuenta y disfruta:</p><ul><li>✓ Compra más rápido la próxima vez</li><li>✓ Da seguimiento a tus pedidos</li><li>✓ Recibe promociones y novedades</li></ul></div>' : '') +
           (esLogin
             ? '<label class="auth-lbl">Correo</label><input class="auth-input" id="aCorreo" type="email" inputmode="email" placeholder="tucorreo@ejemplo.com" />' +
               '<label class="auth-lbl">Contraseña</label><input class="auth-input" id="aPass" type="password" placeholder="Tu contraseña" />'
@@ -595,10 +601,13 @@
         '</div>' +
         '<div class="auth-pie">' +
           '<button class="auth-btn" id="authEnviar"' + (auth.cargando ? ' disabled' : '') + '>' + (auth.cargando ? 'Un momento…' : (esLogin ? 'Entrar' : 'Crear cuenta')) + '</button>' +
+          (auth.continuar ? '<button class="auth-invitado" id="authInvitado">Continuar como invitado</button>' : '') +
         '</div>';
       document.getElementById('authX').addEventListener('click', cerrarAuth);
       cont.querySelectorAll('.auth-tab').forEach((b) => b.addEventListener('click', () => { auth.modo = b.dataset.modo; auth.error = ''; renderAuth(); }));
       document.getElementById('authEnviar').addEventListener('click', enviarAuth);
+      const inv = document.getElementById('authInvitado');
+      if (inv) inv.addEventListener('click', () => { cerrarAuth(); abrirCheckout(true); });
       cont.querySelectorAll('.auth-input').forEach((inp) => inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); enviarAuth(); } }));
     }
 
@@ -634,14 +643,16 @@
     // ===== Checkout paso a paso =====
     const co = { paso: 1, nombre: '', telefono: '', correo: '', direccion: '', metodoPago: '', notas: '', enviando: false, error: '', resultado: null };
 
-    function abrirCheckout() {
+    function abrirCheckout(comoInvitado) {
       if (!estado.carrito.length) return;
-      if (!estado.sesion) { abrirAuth(true); return; } // registro obligatorio para comprar
+      if (!estado.sesion && !comoInvitado) { abrirAuth(true); return; } // muestra beneficios + opción invitado
       co.paso = 1; co.error = ''; co.resultado = null; co.enviando = false;
-      // Prellenar con los datos de la cuenta
-      co.nombre = estado.sesion.cliente.nombre || co.nombre;
-      co.correo = estado.sesion.cliente.correo || co.correo;
-      co.telefono = estado.sesion.cliente.telefono || co.telefono;
+      // Prellenar con los datos de la cuenta (si hay sesión)
+      if (estado.sesion) {
+        co.nombre = estado.sesion.cliente.nombre || co.nombre;
+        co.correo = estado.sesion.cliente.correo || co.correo;
+        co.telefono = estado.sesion.cliente.telefono || co.telefono;
+      }
       const pg = estado.config.pagos || {};
       co.metodoPago = pg.transferencia ? 'TRANSFERENCIA' : (pg.contraEntrega ? 'CONTRA_ENTREGA' : '');
       document.getElementById('coCapa').classList.add('abierto');
